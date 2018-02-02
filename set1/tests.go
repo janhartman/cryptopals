@@ -21,7 +21,7 @@ func TestFixedXor() bool {
 func TestFindXorPlaintext() string {
 	input := "1b37373331363f78151b7f2b783431333d78397828372d363c78373e783a393b3736"
 
-	str, _ := FindXorPlaintext(input)
+	str, _, _ := FindXorPlaintext(input)
 	return str
 }
 
@@ -41,7 +41,7 @@ func TestEncryptRepeatingKeyXor() bool {
 
 	output := "0b3637272a2b2e63622c2e69692a23693a2a3c6324202d623d63343c2a26226324272765272a282b2f20430a652e2c652a3124333a653e2b2027630c692b20283165286326302e27282f"
 
-	return EncryptRepeatingKeyXor(input, key) == output // && EncryptRepeatingKeyXor(input2, key) == output2
+	return EncryptRepeatingKeyXor(input, key) == output
 }
 
 func TestBreakRepeatingKeyXor() string {
@@ -50,5 +50,16 @@ func TestBreakRepeatingKeyXor() string {
 		panic("Could not read file")
 	}
 
-	return BreakRepeatingKeyXor(contents)
+	key, _ := BreakRepeatingKeyXor(contents)
+	return key
+}
+
+func TestDecryptAESInECBMode() string {
+	contents, err := ioutil.ReadFile("set1/input7.txt")
+	if err != nil {
+		panic("Could not read file")
+	}
+
+	key := []byte("YELLOW SUBMARINE")
+	return DecryptAESInECBMode(contents, key)
 }
