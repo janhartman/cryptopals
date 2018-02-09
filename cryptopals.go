@@ -11,4 +11,5 @@ func main() {
 	fmt.Printf("EncryptRepeatingKeyXor: %t\n", set1.TestEncryptRepeatingKeyXor())
 	fmt.Printf("BreakRepeatingKeyXor: %s\n", set1.TestBreakRepeatingKeyXor())
 	fmt.Printf("DecryptAESInECBMode: %s\n", set1.TestDecryptAESInECBMode())
+	fmt.Printf("DetectAESInECBMode: %s\n", set1.TestDetectAESInECBMode())
 }

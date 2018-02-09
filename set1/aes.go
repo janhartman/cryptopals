@@ -3,6 +3,7 @@ package set1
 import (
 	"encoding/base64"
 	"math"
+	"reflect"
 )
 
 func DecryptAESInECBMode(contents, key []byte) string {
@@ -10,6 +11,29 @@ func DecryptAESInECBMode(contents, key []byte) string {
 	base64.StdEncoding.Decode(encrypted, contents)
 
 	return string(decryptAESInECBMode(encrypted, key))
+}
+
+func DetectAESInECBMode(hexCiphertexts [][]byte) string {
+	best, bestCount := []byte(""), 0
+
+	for _, ciphertext := range hexCiphertexts {
+		count := 0
+		for i := 0; i < len(ciphertext); i += 16 {
+			for j := i + 16; j < len(ciphertext); j += 16 {
+				if reflect.DeepEqual(ciphertext[i:i+16], ciphertext[j:j+16]) {
+					count++
+				}
+			}
+		}
+
+		if count > bestCount {
+			bestCount = count
+			best = ciphertext
+		}
+
+	}
+
+	return string(best)
 }
 
 func decryptAESInECBMode(encrypted, key []byte) []byte {

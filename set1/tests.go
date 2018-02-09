@@ -1,7 +1,10 @@
 package set1
 
-import "io/ioutil"
-import "strings"
+import (
+	"bytes"
+	"io/ioutil"
+	"strings"
+)
 
 func TestHexToBase64() bool {
 	input := "49276d206b696c6c696e6720796f757220627261696e206c696b65206120706f69736f6e6f7573206d757368726f6f6d"
@@ -62,4 +65,13 @@ func TestDecryptAESInECBMode() string {
 
 	key := []byte("YELLOW SUBMARINE")
 	return DecryptAESInECBMode(contents, key)
+}
+
+func TestDetectAESInECBMode() string {
+	contents, err := ioutil.ReadFile("set1/input8.txt")
+	if err != nil {
+		panic("Could not read file")
+	}
+
+	return DetectAESInECBMode(bytes.Split(contents, []byte("\n")))
 }
