@@ -131,10 +131,6 @@ func BreakRepeatingKeyXor(contents []byte) (string, string) {
 	return bestKey, decrypted
 }
 
-func DecryptAESInECBMode(contents []byte, key []byte) string {
-	return ""
-}
-
 func decodeHexString(s string) []byte {
 	b, err := hex.DecodeString(s)
 	if err != nil {
